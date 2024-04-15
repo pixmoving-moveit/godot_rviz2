@@ -30,6 +30,7 @@ class DynamicObjects : public RefCounted
 
 public:
   Array get_triangle_list(bool only_known_objects = false);
+  Array get_dynamic_object_list(bool only_known_objects = false);
 
   DynamicObjects() = default;
   ~DynamicObjects() = default;
