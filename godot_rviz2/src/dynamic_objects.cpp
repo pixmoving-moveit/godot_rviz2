@@ -97,6 +97,23 @@ Array DynamicObjects::get_dynamic_object_list(bool only_known_objects)
     dynamic_object["rotation"] = ros2_to_godot(roll, pitch, yaw);
     dynamic_object["size"] =
       ros2_to_godot(shape.dimensions.x, shape.dimensions.y, shape.dimensions.z);
+    if (object.classification.front().label == Label::PEDESTRIAN) {
+      dynamic_object["class"] = "pedestrian";
+    } else if (object.classification.front().label == Label::BICYCLE) {
+      dynamic_object["class"] = "bicycle";
+    } else if (object.classification.front().label == Label::CAR) {
+      dynamic_object["class"] = "car";
+    } else if (object.classification.front().label == Label::TRUCK) {
+      dynamic_object["class"] = "truck";
+    } else if (object.classification.front().label == Label::MOTORBIKE) {
+      dynamic_object["class"] = "motorbike";
+    } else if (object.classification.front().label == Label::BUS) {
+      dynamic_object["class"] = "bus";
+    } else if (object.classification.front().label == Label::TRAILER) {
+      dynamic_object["class"] = "trailer";
+    } else {
+      dynamic_object["class"] = "unknown";
+    }
     dynamic_object_list.append(dynamic_object);
   }
 
