@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://cxv7vxjow4gto"]
+
+[ext_resource type="PackedScene" uid="uid://bpqoqyd3a8hh6" path="res://DynamicObject/Pedestrian.glb" id="1_1vqjq"]
+
+[node name="Pedestrian" instance=ExtResource("1_1vqjq")]

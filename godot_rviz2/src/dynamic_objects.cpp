@@ -29,6 +29,8 @@ using Label = autoware_auto_perception_msgs::msg::ObjectClassification;
 void DynamicObjects::_bind_methods()
 {
   ClassDB::bind_method(D_METHOD("get_triangle_list"), &DynamicObjects::get_triangle_list);
+  ClassDB::bind_method(
+    D_METHOD("get_dynamic_object_list"), &DynamicObjects::get_dynamic_object_list);
   TOPIC_SUBSCRIBER_BIND_METHODS(DynamicObjects);
 }
 
@@ -69,4 +71,51 @@ Array DynamicObjects::get_triangle_list(bool only_known_objects)
   }
 
   return triangle_list;
+}
+
+Array DynamicObjects::get_dynamic_object_list(bool only_known_objects)
+{
+  Array dynamic_object_list;
+
+  const auto last_msg = get_last_msg();
+  if (!last_msg) return dynamic_object_list;
+
+  for (const auto & object : last_msg.value()->objects) {
+    if (only_known_objects && object.classification.front().label == Label::UNKNOWN) continue;
+    const auto & pos = object.kinematics.initial_pose_with_covariance.pose.position;
+    const auto & quat = object.kinematics.initial_pose_with_covariance.pose.orientation;
+    const auto & shape = object.shape;
+
+    double roll, pitch, yaw;
+    // Convert the quaternion to roll, pitch, yaw
+    tf2::Quaternion quaternion(quat.x, quat.y, quat.z, quat.w);
+    tf2::Matrix3x3(quaternion).getRPY(roll, pitch, yaw);
+
+    Dictionary dynamic_object;
+    dynamic_object["position"] = ros2_to_godot(pos.x, pos.y, pos.z);
+    dynamic_object["class"] = object.classification.front().label;
+    dynamic_object["rotation"] = ros2_to_godot(roll, pitch, yaw);
+    dynamic_object["size"] =
+      ros2_to_godot(shape.dimensions.x, shape.dimensions.y, shape.dimensions.z);
+    if (object.classification.front().label == Label::PEDESTRIAN) {
+      dynamic_object["class"] = "pedestrian";
+    } else if (object.classification.front().label == Label::BICYCLE) {
+      dynamic_object["class"] = "bicycle";
+    } else if (object.classification.front().label == Label::CAR) {
+      dynamic_object["class"] = "car";
+    } else if (object.classification.front().label == Label::TRUCK) {
+      dynamic_object["class"] = "truck";
+    } else if (object.classification.front().label == Label::MOTORCYCLE) {
+      dynamic_object["class"] = "motorcycle";
+    } else if (object.classification.front().label == Label::BUS) {
+      dynamic_object["class"] = "bus";
+    } else if (object.classification.front().label == Label::TRAILER) {
+      dynamic_object["class"] = "trailer";
+    } else {
+      dynamic_object["class"] = "unknown";
+    }
+    dynamic_object_list.append(dynamic_object);
+  }
+
+  return dynamic_object_list;
 }
