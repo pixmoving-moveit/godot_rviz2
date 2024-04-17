@@ -2,6 +2,7 @@ extends MeshInstance3D
 
 var dynamic_objects = DynamicObjects.new()
 var only_known_object = true
+var object_3d_model_mode = false
 
 var pool_size = 100
 var model_types = {
@@ -29,11 +30,33 @@ func initialize_model_pools():
 func _process(_delta):
 	if not dynamic_objects.has_new():
 		return
-	var object_list = dynamic_objects.get_dynamic_object_list(only_known_object)
-	reset_visibility()
-	update_models(object_list)
+
+	if object_3d_model_mode:
+		var object_list = dynamic_objects.get_dynamic_object_list(only_known_object)
+		reset_visibility()
+		update_models(object_list)
+	else:
+		var arr = []
+		arr.resize(Mesh.ARRAY_MAX)
+		var verts = PackedVector3Array()
+		var normals = PackedVector3Array()
+
+		var triangle_list = dynamic_objects.get_triangle_list(only_known_object)
+
+		for point in triangle_list:
+			verts.append(point["position"])
+			normals.append(point["normal"])
+
+		arr[Mesh.ARRAY_VERTEX] = verts
+		arr[Mesh.ARRAY_NORMAL] = normals
+
+		if !verts.is_empty():
+			reset_visibility()
+			mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arr)
+	dynamic_objects.set_old()
 
 func reset_visibility():
+	mesh.clear_surfaces()
 	for model_type in model_types:
 		for node in model_types[model_type]["pool"]:
 			node.visible = false
@@ -53,33 +76,9 @@ func update_models(object_list):
 				node.set_position(Vector3(object["position"].x, object["position"].y - object["size"].y * 0.5, object["position"].z))
 				node.set_rotation(object["rotation"])
 				model_indices[model_type] += 1
-	
-
-
-
-#-------------------------------
-	#var arr = []
-	#arr.resize(Mesh.ARRAY_MAX)
-	#var verts = PackedVector3Array()
-##	var uvs = PoolVector2Array()
-	#var normals = PackedVector3Array()
-##	var indices = PoolIntArray()
-#
-	#var triangle_list = dynamic_objects.get_triangle_list(only_known_object)
-#
-	#for point in triangle_list:
-		#verts.append(point["position"])
-		#normals.append(point["normal"])
-#
-	#arr[Mesh.ARRAY_VERTEX] = verts
-	#arr[Mesh.ARRAY_NORMAL] = normals
-##	arr[Mesh.ARRAY_INDEX] = indices	
-##	arr[Mesh.ARRAY_TEX_UV] = uvs
-#
-	#if !verts.is_empty():
-		#mesh.clear_surfaces()
-		#mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arr)
-	#dynamic_objects.set_old()
 
 func _on_OnlyKnownObjectCheckButton_toggled(button_pressed):
 	only_known_object = button_pressed
+
+func _on_d_model_object_toggled(toggled_on):
+	object_3d_model_mode = toggled_on
