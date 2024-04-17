@@ -105,8 +105,8 @@ Array DynamicObjects::get_dynamic_object_list(bool only_known_objects)
       dynamic_object["class"] = "car";
     } else if (object.classification.front().label == Label::TRUCK) {
       dynamic_object["class"] = "truck";
-    } else if (object.classification.front().label == Label::MOTORBIKE) {
-      dynamic_object["class"] = "motorbike";
+    } else if (object.classification.front().label == Label::MOTORCYCLE) {
+      dynamic_object["class"] = "motorcycle";
     } else if (object.classification.front().label == Label::BUS) {
       dynamic_object["class"] = "bus";
     } else if (object.classification.front().label == Label::TRAILER) {
