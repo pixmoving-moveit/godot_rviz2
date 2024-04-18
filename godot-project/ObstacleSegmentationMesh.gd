@@ -41,3 +41,7 @@ func _process(delta):
 		mesh.clear_surfaces()
 		mesh.add_surface_from_arrays(Mesh.PRIMITIVE_POINTS, arr)
 	pointcloud.set_old()
+
+
+func _on_enable_obstacle_segmentation_button_toggled(toggled_on):
+	visible = toggled_on

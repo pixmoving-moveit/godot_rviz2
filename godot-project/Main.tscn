@@ -5527,19 +5527,28 @@ focus_mode = 0
 button_pressed = true
 text = "Only Known Objects"
 
-[node name="Object3DModel" type="CheckButton" parent="Menu"]
+[node name="Object3DModelButton" type="CheckButton" parent="Menu"]
+layout_mode = 0
 offset_top = 121.0
 offset_right = 224.0
 offset_bottom = 152.0
 focus_mode = 0
 text = "3D Model Mode"
 
+[node name="EnableObstacleSegmentationButton" type="CheckButton" parent="Menu"]
+offset_top = 159.0
+offset_right = 224.0
+offset_bottom = 190.0
+focus_mode = 0
+button_pressed = true
+text = "ObstacleSegmentation"
+
 [node name="RenderingQuality" type="HBoxContainer" parent="Menu"]
 layout_mode = 0
 offset_left = 6.0
-offset_top = 165.0
+offset_top = 202.0
 offset_right = 356.0
-offset_bottom = 188.0
+offset_bottom = 225.0
 
 [node name="Label" type="Label" parent="Menu/RenderingQuality"]
 layout_mode = 2
@@ -5593,5 +5602,6 @@ texture = ExtResource("23")
 [connection signal="toggled" from="Menu/NightModeCheckButton" to="BackGround" method="_on_night_mode_check_button_toggled"]
 [connection signal="toggled" from="Menu/NightModeCheckButton" to="EgoVehicle" method="_on_night_mode_check_button_toggled"]
 [connection signal="toggled" from="Menu/OnlyKnownObjectCheckButton" to="DynamicObjectMesh" method="_on_OnlyKnownObjectCheckButton_toggled"]
-[connection signal="toggled" from="Menu/Object3DModel" to="DynamicObjectMesh" method="_on_d_model_object_toggled"]
+[connection signal="toggled" from="Menu/Object3DModelButton" to="DynamicObjectMesh" method="_on_d_model_object_toggled"]
+[connection signal="toggled" from="Menu/EnableObstacleSegmentationButton" to="ObstacleSegmentationMesh" method="_on_enable_obstacle_segmentation_button_toggled"]
 [connection signal="value_changed" from="Menu/RenderingQuality/MSAASlider" to="." method="_on_MSAASlider_value_changed"]
