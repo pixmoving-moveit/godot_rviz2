@@ -108,7 +108,6 @@ scons platform=linux -j8 tools=no target=template_release custom_modules=../godo
 ## TODO
 - Refactor codes
 - Simplified description of ros dependencies on SCon build system
-- Visualize autoware_auto_mapping_msgs::msg::HADMapBin directly
 
 ## Reference
 
