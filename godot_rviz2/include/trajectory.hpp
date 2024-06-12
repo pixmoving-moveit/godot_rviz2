@@ -21,7 +21,7 @@
 #include "core/variant/variant.h"
 #include "topic_subscriber.hpp"
 
-#include "autoware_auto_planning_msgs/msg/trajectory.hpp"
+#include "autoware_planning_msgs/msg/trajectory.hpp"
 
 /**
  * @class Trajectory
@@ -32,7 +32,7 @@
 class Trajectory : public RefCounted
 {
   GDCLASS(Trajectory, RefCounted);
-  TOPIC_SUBSCRIBER(Trajectory, autoware_auto_planning_msgs::msg::Trajectory);
+  TOPIC_SUBSCRIBER(Trajectory, autoware_planning_msgs::msg::Trajectory);
 
 public:
   /**

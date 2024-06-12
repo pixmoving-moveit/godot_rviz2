@@ -47,8 +47,7 @@ bool VehicleStatus::is_turn_on_right()
   if (!last_msg) return false;
 
   // Check if the right turn indicator is enabled in the message
-  return last_msg.value()->report ==
-         autoware_auto_vehicle_msgs::msg::TurnIndicatorsReport::ENABLE_RIGHT;
+  return last_msg.value()->report == autoware_vehicle_msgs::msg::TurnIndicatorsReport::ENABLE_RIGHT;
 }
 
 /**
@@ -67,6 +66,5 @@ bool VehicleStatus::is_turn_on_left()
   if (!last_msg) return false;
 
   // Check if the left turn indicator is enabled in the message
-  return last_msg.value()->report ==
-         autoware_auto_vehicle_msgs::msg::TurnIndicatorsReport::ENABLE_LEFT;
+  return last_msg.value()->report == autoware_vehicle_msgs::msg::TurnIndicatorsReport::ENABLE_LEFT;
 }

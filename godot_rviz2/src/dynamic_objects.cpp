@@ -24,7 +24,7 @@
 #include <eigen3/Eigen/Core>
 #include <eigen3/Eigen/Geometry>
 
-using Label = autoware_auto_perception_msgs::msg::ObjectClassification;
+using Label = autoware_perception_msgs::msg::ObjectClassification;
 
 void DynamicObjects::_bind_methods()
 {
@@ -51,14 +51,14 @@ Array DynamicObjects::get_triangle_list(bool only_known_objects)
     Eigen::Quaternionf quaternion(quat.w, quat.x, quat.y, quat.z);
     std::vector<Vector3> vertices, normals;
 
-    if (shape.type == autoware_auto_perception_msgs::msg::Shape::BOUNDING_BOX) {
+    if (shape.type == autoware_perception_msgs::msg::Shape::BOUNDING_BOX) {
       generate_boundingbox3d(
         shape.dimensions.x, shape.dimensions.y, shape.dimensions.z, translation, quaternion,
         vertices, normals);
-    } else if (shape.type == autoware_auto_perception_msgs::msg::Shape::CYLINDER) {
+    } else if (shape.type == autoware_perception_msgs::msg::Shape::CYLINDER) {
       generate_cylinder3d(
         shape.dimensions.x / 2, shape.dimensions.z, translation, quaternion, vertices, normals);
-    } else if (shape.type == autoware_auto_perception_msgs::msg::Shape::POLYGON) {
+    } else if (shape.type == autoware_perception_msgs::msg::Shape::POLYGON) {
       generate_polygon3d(
         shape.footprint, shape.dimensions.z, translation, quaternion, vertices, normals);
     }

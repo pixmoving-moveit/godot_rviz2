@@ -21,12 +21,12 @@
 #include "core/variant/variant.h"
 #include "topic_subscriber.hpp"
 
-#include "autoware_auto_planning_msgs/msg/path.hpp"
+#include "autoware_planning_msgs/msg/path.hpp"
 
 class BehaviorPath : public RefCounted
 {
   GDCLASS(BehaviorPath, RefCounted);
-  TOPIC_SUBSCRIBER(BehaviorPath, autoware_auto_planning_msgs::msg::Path);
+  TOPIC_SUBSCRIBER(BehaviorPath, autoware_planning_msgs::msg::Path);
 
 public:
   Array get_path_triangle_strip(const float width);

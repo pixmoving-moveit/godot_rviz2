@@ -21,7 +21,7 @@
 #include "core/variant/variant.h"
 #include "topic_subscriber.hpp"
 
-#include "autoware_auto_vehicle_msgs/msg/velocity_report.hpp"
+#include "autoware_vehicle_msgs/msg/velocity_report.hpp"
 
 /**
  * @class VelocityReport
@@ -34,7 +34,7 @@
 class VelocityReport : public RefCounted
 {
   GDCLASS(VelocityReport, RefCounted);
-  TOPIC_SUBSCRIBER(VelocityReport, autoware_auto_vehicle_msgs::msg::VelocityReport);
+  TOPIC_SUBSCRIBER(VelocityReport, autoware_vehicle_msgs::msg::VelocityReport);
 
 public:
   /**

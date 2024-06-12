@@ -21,7 +21,7 @@
 #include "core/variant/variant.h"
 #include "topic_subscriber.hpp"
 
-#include "autoware_auto_vehicle_msgs/msg/steering_report.hpp"
+#include "autoware_vehicle_msgs/msg/steering_report.hpp"
 
 /**
  * @class SteeringReport
@@ -34,7 +34,7 @@
 class SteeringReport : public RefCounted
 {
   GDCLASS(SteeringReport, RefCounted);
-  TOPIC_SUBSCRIBER(SteeringReport, autoware_auto_vehicle_msgs::msg::SteeringReport);
+  TOPIC_SUBSCRIBER(SteeringReport, autoware_vehicle_msgs::msg::SteeringReport);
 
 public:
   /**

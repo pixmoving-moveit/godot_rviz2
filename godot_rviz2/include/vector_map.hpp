@@ -23,7 +23,7 @@
 #include "lanelet2_extension/regulatory_elements/autoware_traffic_light.hpp"
 #include "topic_subscriber.hpp"
 
-#include "autoware_auto_mapping_msgs/msg/had_map_bin.hpp"
+#include "autoware_map_msgs/msg/lanelet_map_bin.hpp"
 
 #include <vector>
 
@@ -59,7 +59,7 @@ struct TrafficLightGroup
 class VectorMap : public RefCounted
 {
   GDCLASS(VectorMap, RefCounted);
-  TOPIC_SUBSCRIBER(VectorMap, autoware_auto_mapping_msgs::msg::HADMapBin);
+  TOPIC_SUBSCRIBER(VectorMap, autoware_map_msgs::msg::LaneletMapBin);
 
 public:
   bool generate_graph_structure();

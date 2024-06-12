@@ -21,7 +21,7 @@
 #include "tf2_ros/buffer.h"
 #include "tf2_ros/transform_listener.h"
 
-#include "autoware_auto_perception_msgs/msg/shape.hpp"
+#include "autoware_perception_msgs/msg/shape.hpp"
 #include "geometry_msgs/msg/polygon.hpp"
 #include "geometry_msgs/msg/pose.hpp"
 #include "geometry_msgs/msg/transform.hpp"

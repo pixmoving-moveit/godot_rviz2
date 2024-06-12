@@ -21,7 +21,7 @@
 #include "core/variant/variant.h"
 #include "topic_subscriber.hpp"
 
-#include "autoware_auto_vehicle_msgs/msg/turn_indicators_report.hpp"
+#include "autoware_vehicle_msgs/msg/turn_indicators_report.hpp"
 
 /**
  * @class VehicleStatus
@@ -34,7 +34,7 @@
 class VehicleStatus : public RefCounted
 {
   GDCLASS(VehicleStatus, RefCounted);
-  TOPIC_SUBSCRIBER(VehicleStatus, autoware_auto_vehicle_msgs::msg::TurnIndicatorsReport);
+  TOPIC_SUBSCRIBER(VehicleStatus, autoware_vehicle_msgs::msg::TurnIndicatorsReport);
 
 public:
   /**

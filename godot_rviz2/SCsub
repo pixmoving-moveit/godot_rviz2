@@ -46,11 +46,10 @@ msg_pkgs = ["tf2_msgs",
             "sensor_msgs",
             "std_msgs",
             "rosgraph_msgs",
-            "autoware_auto_planning_msgs",
-            "autoware_auto_mapping_msgs",
-            "autoware_auto_perception_msgs",
+            "autoware_planning_msgs",
+            "autoware_map_msgs",
             "autoware_perception_msgs",
-            "autoware_auto_vehicle_msgs"]
+            "autoware_vehicle_msgs"]
 
 pcl_include_path = "/usr/include/pcl-1.12"
 eigen3_include_path = "/usr/include/eigen3"

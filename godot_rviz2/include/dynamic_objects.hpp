@@ -21,12 +21,12 @@
 #include "core/variant/variant.h"
 #include "topic_subscriber.hpp"
 
-#include "autoware_auto_perception_msgs/msg/predicted_objects.hpp"
+#include "autoware_perception_msgs/msg/predicted_objects.hpp"
 
 class DynamicObjects : public RefCounted
 {
   GDCLASS(DynamicObjects, RefCounted);
-  TOPIC_SUBSCRIBER(DynamicObjects, autoware_auto_perception_msgs::msg::PredictedObjects);
+  TOPIC_SUBSCRIBER(DynamicObjects, autoware_perception_msgs::msg::PredictedObjects);
 
 public:
   Array get_triangle_list(bool only_known_objects = false);
