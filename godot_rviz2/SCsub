@@ -37,6 +37,7 @@ ros_libs = ["rclcpp",
              "builtin_interfaces__rosidl_generator_c",
              "lanelet2_core",
              "lanelet2_extension_lib"]
+
 msg_pkgs = ["tf2_msgs",
             "actionlib_msgs",
             "action_msgs",
@@ -49,7 +50,15 @@ msg_pkgs = ["tf2_msgs",
             "autoware_planning_msgs",
             "autoware_map_msgs",
             "autoware_perception_msgs",
-            "autoware_vehicle_msgs"]
+            "autoware_vehicle_msgs",
+
+
+            # pixmoving new add  from teddy@pixmoving.net 20240725
+            "tier4_vehicle_msgs",
+            "tier4_api_msgs",
+            "autoware_adapi_v1_msgs",
+            "pix_robobus_driver_msgs",
+            "pixmoving_hmi_msgs"]
 
 pcl_include_path = "/usr/include/pcl-1.12"
 eigen3_include_path = "/usr/include/eigen3"
