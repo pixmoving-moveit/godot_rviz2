@@ -31,6 +31,27 @@
 #include "vehicle_status.hpp"
 #include "velocity_report.hpp"
 
+
+// pixmoving new add  from teddy@pixmoving.net 20240725
+#include "gear_report.hpp"
+#include "throttle_report.hpp"
+#include "battery_report.hpp"
+#include "brake_report.hpp"  
+#include "turn_signal_report.hpp"
+#include "autoware_engage.hpp"
+#include "autoware_mode_report.hpp"
+#include "traffic_signal_report.hpp"
+// dispaly
+#include "current_station.hpp"
+#include "target_station.hpp"
+#include "estimate_time.hpp"
+#include "target_distance.hpp"
+
+
+
+
+
+
 void initialize_godot_rviz2_module(ModuleInitializationLevel p_level)
 {
   if (p_level != MODULE_INITIALIZATION_LEVEL_SCENE) {
@@ -49,6 +70,29 @@ void initialize_godot_rviz2_module(ModuleInitializationLevel p_level)
   ClassDB::register_class<VelocityReport>();
   ClassDB::register_class<VectorMap>();
   ClassDB::register_class<Parameter>();
+
+
+  // pixmoving new add  from teddy@pixmoving.net 20240725
+
+  ClassDB::register_class<GearReport>();
+  ClassDB::register_class<BmsReportBattery>();
+  ClassDB::register_class<ActuationStatusBrake>();
+  ClassDB::register_class<ActuationStatusThrottle>();
+  ClassDB::register_class<TurnSignalReport>();
+  ClassDB::register_class<AutowareEngage>();
+  ClassDB::register_class<TrafficLightReport>();
+  ClassDB::register_class<ModeReport>();
+  
+  // display
+  ClassDB::register_class<CurrentStationInfo>();
+  ClassDB::register_class<TargetStationInfo>();
+  ClassDB::register_class<EstimateTimeInfo>();
+  ClassDB::register_class<TargetDistanceInfo>();
+
+
+
+
+
 }
 
 void uninitialize_godot_rviz2_module(ModuleInitializationLevel p_level)
