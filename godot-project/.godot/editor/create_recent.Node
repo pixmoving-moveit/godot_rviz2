@@ -1,0 +1,12 @@
+SpotLight3D
+CollisionShape3D
+Node3D
+CharacterBody3D
+TextureRect
+CanvasGroup
+Node2D
+Label
+HSlider
+TextureProgressBar
+ProgressBar
+Control
