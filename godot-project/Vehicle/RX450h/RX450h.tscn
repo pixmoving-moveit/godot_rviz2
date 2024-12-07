@@ -81,6 +81,7 @@ refraction_scale = 0.1
 grow_amount = 0.481
 
 [node name="RX450h" instance=ExtResource("1_qgkfj")]
+metadata/_edit_group_ = true
 
 [node name="FogLight" parent="." index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_xu21l")

@@ -1,0 +1,89 @@
+# SCsub
+
+import os
+Import('env')
+
+ros_distro = "humble"
+cpp_version = "-std=c++17"
+ros_path = "/opt/ros/" + ros_distro
+autoware_path = os.environ['COLCON_PREFIX_PATH']
+
+# include package list
+ros_libs = ["rclcpp",
+             "rcl",
+             "rcl_yaml_param_parser",
+             "rcutils",
+             "rcpputils",
+             "rmw",
+             "rmw_implementation",
+             "tracetools",
+             "ament_index_cpp",
+             "rosidl_typesupport_cpp",
+             "rosidl_typesupport_c",
+             "rosidl_runtime_c",
+             "console_bridge",
+             "rcl_action",
+             "rclcpp_action",
+             "tf2",
+             "tf2_ros",
+             "liblibstatistics_collector",
+             "pcl_ros_tf", 
+             "rcl_interfaces__rosidl_typesupport_c",
+             "rcl_interfaces__rosidl_generator_c",
+             "rcl_logging_interface",
+             "rcl_logging_spdlog",
+             "builtin_interfaces__rosidl_generator_c"]
+msg_pkgs = ["tf2_msgs",
+            "actionlib_msgs",
+            "action_msgs",
+            "rcl_interfaces",
+            "visualization_msgs",
+            "statistics_msgs",
+            "sensor_msgs",
+            "std_msgs",
+            "rosgraph_msgs",
+            "autoware_auto_planning_msgs",
+            "autoware_auto_perception_msgs",
+            "autoware_auto_vehicle_msgs",
+            
+            "tier4_vehicle_msgs",
+            "tier4_api_msgs",
+            "autoware_adapi_v1_msgs",
+            "pix_robobus_driver_msgs",
+            "autoware_perception_msgs",
+            "pixmoving_hmi_msgs"]
+
+pcl_include_path = "/usr/include/pcl-1.12"
+eigen3_include_path = "/usr/include/eigen3"
+
+env.add_source_files(env.modules_sources, "src/*.cpp")
+env.add_source_files(env.modules_sources, "register_types.cpp")
+
+ros_blacklist_pkgs = ["idl", "dds", "mimick"]
+ros_pkgs = set([f for f in os.listdir(ros_path+"/include") if os.path.isdir(os.path.join(ros_path+"/include", f))]) ^ set(ros_blacklist_pkgs)
+ros_include_paths = list(map(lambda pkg: ros_path +"/include/" + pkg, ros_pkgs))
+ros_lib_path = ros_path +"/lib"
+autoware_pkgs = [f for f in os.listdir(autoware_path) if os.path.isdir(os.path.join(autoware_path, f))]
+autoware_include_paths = list(map(lambda pkg: autoware_path + "/" + pkg + "/include/" + pkg, autoware_pkgs))
+autoware_lib_paths = list(map(lambda pkg: autoware_path + "/" + pkg + "/lib", autoware_pkgs))
+
+env.Append(CPPPATH=["include", 
+                    ros_path+"/include",
+                    pcl_include_path,
+                    eigen3_include_path]
+                    +ros_include_paths
+                    +autoware_include_paths)
+
+env.Append(LIBPATH=[ros_lib_path, 
+                    ros_lib_path+"/x86_64-linux-gnu",
+                    "/usr/lib/x86_64-linux-gnu"]
+                    +autoware_lib_paths)
+
+env.Append(CCFLAGS=[cpp_version, "-fexceptions"])
+
+msg_gen_prefix = "__rosidl_typesupport_cpp"
+msg_libs = list(map(lambda pkg: pkg + msg_gen_prefix, msg_pkgs))
+
+env.Append(LIBS=ros_libs
+                +['pcl_common']
+                +msg_libs)

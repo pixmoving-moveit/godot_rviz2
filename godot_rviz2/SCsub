@@ -50,7 +50,14 @@ msg_pkgs = ["tf2_msgs",
             "autoware_auto_mapping_msgs",
             "autoware_auto_perception_msgs",
             "autoware_perception_msgs",
-            "autoware_auto_vehicle_msgs"]
+            "autoware_auto_vehicle_msgs",
+
+            "tier4_vehicle_msgs",
+            "tier4_api_msgs",
+            "autoware_adapi_v1_msgs",
+            "pix_robobus_driver_msgs",
+            "pixmoving_hmi_msgs"]
+
 
 pcl_include_path = "/usr/include/pcl-1.12"
 eigen3_include_path = "/usr/include/eigen3"

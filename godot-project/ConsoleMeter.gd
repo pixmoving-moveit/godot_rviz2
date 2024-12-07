@@ -12,7 +12,7 @@ func _process(_delta):
 		return
 	var velocity = velocity_report.get_velocity() * 3.6
 	
-	$VelocityLabel.text = str(velocity).pad_decimals(0)+"km"
+	$VelocityLabel.text = str(velocity).pad_decimals(0)
 
 	$Hand.set_rotation(velocity * velocity_scale)
 	velocity_report.set_old()
